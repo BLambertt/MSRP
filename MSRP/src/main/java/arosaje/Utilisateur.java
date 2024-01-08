@@ -3,11 +3,10 @@ package arosaje;
 import jakarta.persistence.Entity;
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.Objects;
 
 @Entity
-@Table(name="UTILISATEURS")
-public class Utilisateurs {
+@Table(name="UTILISATEUR")
+public class Utilisateur {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -107,7 +106,7 @@ public class Utilisateurs {
     @Override
     public String toString()
     {
-        final StringBuilder sb = new StringBuilder("Utilisateurs{");
+        final StringBuilder sb = new StringBuilder("Utilisateur{");
         sb.append("id=").append(id);
         sb.append(", nom='").append(nom).append('\'');
         sb.append(", prenom='").append(prenom).append('\'');
