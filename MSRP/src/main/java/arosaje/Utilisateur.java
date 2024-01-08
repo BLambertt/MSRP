@@ -31,6 +31,18 @@ public class Utilisateur {
 
 // TODO : Add ASSETS relatioship
 
+    //constructor
+    Utilisateur(
+            String prenom,
+            String nom,
+            Date date_de_naissance,
+            String ville,
+            String adresse,
+            String email,
+            String mot_de_passe,
+            String role
+    ) {}
+
     public int getId() {
         return id;
     }
