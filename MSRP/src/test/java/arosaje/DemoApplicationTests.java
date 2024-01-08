@@ -1,4 +1,4 @@
-package com.msrp.demo;
+package arosaje;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
