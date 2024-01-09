@@ -43,6 +43,14 @@ public class Utilisateur {
             String mot_de_passe,
             String role
     ) {
+        this.prenom = prenom;
+        this.nom = nom;
+        this.date_de_naissance = java.sql.Date.valueOf(date_de_naissance);
+        this.ville = ville;
+        this.adresse = adresse;
+        this.email = email;
+        this.mot_de_passe = mot_de_passe;
+        this.role = role;
     }
 
     public Utilisateur() {
