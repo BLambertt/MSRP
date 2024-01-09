@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "UTILISATEUR")
@@ -29,6 +30,9 @@ public class Utilisateur {
     private String mot_de_passe;
     @Column(name = "ROLE")
     private String role;
+    @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
+    private Set<Commentaire> commentaires;
+
 
 // TODO : Add ASSETS relatioship
 
@@ -41,8 +45,8 @@ public class Utilisateur {
             String adresse,
             String email,
             String mot_de_passe,
-            String role
-    ) {
+            String role,
+            Set<Commentaire> commentaires) {
         this.prenom = prenom;
         this.nom = nom;
         this.date_de_naissance = java.sql.Date.valueOf(date_de_naissance);
@@ -51,6 +55,7 @@ public class Utilisateur {
         this.email = email;
         this.mot_de_passe = mot_de_passe;
         this.role = role;
+        this.commentaires = commentaires;
     }
 
     public Utilisateur() {
@@ -127,6 +132,14 @@ public class Utilisateur {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(Set<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 
     @Override
