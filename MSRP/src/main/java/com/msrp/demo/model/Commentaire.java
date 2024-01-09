@@ -24,8 +24,8 @@ public class Commentaire {
     //todo relation
     private DemandeGardiennage demandeGardiennage;
 
-    @Column(name = "ID_UTILISATEUR")
-    //todo relation
+    @ManyToOne
+    @JoinColumn(name = "ID_UTILISATEUR")
     private Utilisateur auteur;
 
     @Column(name = "ID_ASSETS")
