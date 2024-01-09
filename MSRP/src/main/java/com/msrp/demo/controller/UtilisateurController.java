@@ -1,4 +1,4 @@
-package com.msrp.demo.Controller;
+package com.msrp.demo.controller;
 
 public class UtilisateurController {
 }
