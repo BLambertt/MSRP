@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "UTILISATEUR")
@@ -29,8 +31,27 @@ public class Utilisateur {
     private String mot_de_passe;
     @Column(name = "ROLE")
     private String role;
+    @OneToMany( cascade = CascadeType.ALL)
+    private Set<Commentaire> commentaires;
 
-// TODO : Add ASSETS relatioship
+    @OneToMany( cascade = CascadeType.ALL)
+    private Set<Post> posts;
+
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<Plante> planteList;
+
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<DemandeGardiennage> demandeList;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_asset",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "asset_id") }
+    )
+    private List<Asset> assetList;
+
+
 
     //constructor
     public Utilisateur(
@@ -41,8 +62,8 @@ public class Utilisateur {
             String adresse,
             String email,
             String mot_de_passe,
-            String role
-    ) {
+            String role,
+            Set<Commentaire> commentaires) {
         this.prenom = prenom;
         this.nom = nom;
         this.date_de_naissance = java.sql.Date.valueOf(date_de_naissance);
@@ -51,10 +72,35 @@ public class Utilisateur {
         this.email = email;
         this.mot_de_passe = mot_de_passe;
         this.role = role;
+        this.commentaires = commentaires;
     }
 
     public Utilisateur() {
 
+    }
+
+    public List<Plante> getPlanteList() {
+        return planteList;
+    }
+
+    public void setPlanteList(List<Plante> planteList) {
+        this.planteList = planteList;
+    }
+
+    public List<Asset> getAssetList() {
+        return assetList;
+    }
+
+    public void setAssetList(List<Asset> assetList) {
+        this.assetList = assetList;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
     public int getId() {
@@ -127,6 +173,14 @@ public class Utilisateur {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Set<Commentaire> getCommentaires() {
+        return commentaires;
+    }
+
+    public void setCommentaires(Set<Commentaire> commentaires) {
+        this.commentaires = commentaires;
     }
 
     @Override

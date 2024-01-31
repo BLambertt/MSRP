@@ -1,5 +1,6 @@
 package com.msrp.demo.bdd;
 
+import com.msrp.demo.model.Commentaire;
 import com.msrp.demo.model.Utilisateur;
 import com.msrp.demo.repository.UtilisateurRepository;
 import org.slf4j.Logger;
@@ -26,8 +27,7 @@ class InitBdd {
                     "içi ou là",
                     "laurent@mail.test",
                     "myPassword",
-                    "monRole"
-            )));
+                    "monRole", null)));
         };
     };
 };
