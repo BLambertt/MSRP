@@ -9,4 +9,5 @@ public class AccueilController {
     String PageAccueil(){
         return "HelloWorld";
     }
+
 }
