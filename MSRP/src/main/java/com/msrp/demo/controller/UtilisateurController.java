@@ -4,7 +4,6 @@ import com.msrp.demo.exception.UtilisateurNotFoundException;
 import com.msrp.demo.model.Utilisateur;
 import com.msrp.demo.repository.UtilisateurRepository;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
