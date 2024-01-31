@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -30,11 +31,27 @@ public class Utilisateur {
     private String mot_de_passe;
     @Column(name = "ROLE")
     private String role;
-    @OneToMany(mappedBy = "auteur", cascade = CascadeType.ALL)
+    @OneToMany( cascade = CascadeType.ALL)
     private Set<Commentaire> commentaires;
 
+    @OneToMany( cascade = CascadeType.ALL)
+    private Set<Post> posts;
 
-// TODO : Add ASSETS relatioship
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<Plante> planteList;
+
+    @OneToMany( cascade = CascadeType.ALL)
+    private List<DemandeGardiennage> demandeList;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "user_asset",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "asset_id") }
+    )
+    private List<Asset> assetList;
+
+
 
     //constructor
     public Utilisateur(
@@ -60,6 +77,30 @@ public class Utilisateur {
 
     public Utilisateur() {
 
+    }
+
+    public List<Plante> getPlanteList() {
+        return planteList;
+    }
+
+    public void setPlanteList(List<Plante> planteList) {
+        this.planteList = planteList;
+    }
+
+    public List<Asset> getAssetList() {
+        return assetList;
+    }
+
+    public void setAssetList(List<Asset> assetList) {
+        this.assetList = assetList;
+    }
+
+    public Set<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(Set<Post> posts) {
+        this.posts = posts;
     }
 
     public int getId() {

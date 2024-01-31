@@ -2,10 +2,11 @@ package com.msrp.demo.model;
 
 import jakarta.persistence.*;
 
-import java.util.Map;
+import java.util.List;
+
 
 @Entity
-@Table(name = "ASSET")
+@Table(name = "Asset")
 public class Asset {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -24,12 +25,29 @@ public class Asset {
     @Column(name = "MYME_TYPE")
     private String mymeType;
 
+    @ManyToMany(mappedBy = "assetList")
+    private List<Plante> planteList;
+
+    @ManyToMany(mappedBy = "assetList")
+    private List<Utilisateur> userList;
+
+    @ManyToMany(mappedBy = "assets")
+    private List<Commentaire> commentaires;
+
     public Asset(int id, String blob, String metaData, String name, String mymeType) {
         this.id = id;
         this.blob = blob;
         this.metaData = metaData;
         this.name = name;
         this.mymeType = mymeType;
+    }
+
+    public List<Plante> getPlanteList() {
+        return planteList;
+    }
+
+    public void setPlanteList(List<Plante> planteList) {
+        this.planteList = planteList;
     }
 
     public Asset() {

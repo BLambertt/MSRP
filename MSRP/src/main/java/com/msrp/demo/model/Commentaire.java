@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "Commentaire")
 public class Commentaire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -16,24 +18,33 @@ public class Commentaire {
     @Column(name = "DATE")
     private LocalDate date;
 
-    @Column(name = "ID_POST")
-    //todo relation
+    @ManyToOne
+    @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(name = "ID_DEMANDE_GARDIENNAGE")
-    //todo relation
-    private DemandeGardiennage demandeGardiennage;
+    @ManyToOne
+    @JoinColumn(name = "demande_id")
+    private DemandeGardiennage demande;
+
+
+
 
     @ManyToOne
-    @JoinColumn(name = "ID_UTILISATEUR")
+    @JoinColumn(name = "ID_UTILISATEUR", nullable = false)
     private Utilisateur auteur;
 
-    @Column(name = "ID_ASSETS")
-    @ManyToMany(mappedBy = "commentaires")
-    private Set<Assets> assets;
+
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "commentaires_asset",
+            joinColumns = { @JoinColumn(name = "commentaire_id") },
+            inverseJoinColumns = { @JoinColumn(name = "asset_id") }
+    )
+    private Set<Asset> assets;
 
     //Commmentaire de post
-    public Commentaire(String texte, LocalDate date, Post post, Utilisateur auteur, Set<Assets> assets) {
+    public Commentaire(String texte, LocalDate date, Post post, Utilisateur auteur, Set<Asset> assets) {
         this.texte = texte;
         this.date = date;
         this.post = post;
@@ -42,10 +53,10 @@ public class Commentaire {
     }
 
     //Commentaire sur une demande de gardiennage
-    public Commentaire(String texte, LocalDate date, DemandeGardiennage demandeGardiennage, Utilisateur auteur, Set<Assets> assets) {
+    public Commentaire(String texte, LocalDate date, DemandeGardiennage demandeGardiennage, Utilisateur auteur, Set<Asset> assets) {
         this.texte = texte;
         this.date = date;
-        this.demandeGardiennage = demandeGardiennage;
+
         this.auteur = auteur;
         this.assets = assets;
     }
@@ -85,13 +96,7 @@ public class Commentaire {
         this.post = post;
     }
 
-    public DemandeGardiennage getDemandeGardiennage() {
-        return demandeGardiennage;
-    }
 
-    public void setDemandeGardiennage(DemandeGardiennage demandeGardiennage) {
-        this.demandeGardiennage = demandeGardiennage;
-    }
 
     public Utilisateur getAuteur() {
         return auteur;
@@ -101,11 +106,11 @@ public class Commentaire {
         this.auteur = auteur;
     }
 
-    public Set<Assets> getAssets() {
+    public Set<Asset> getAssets() {
         return assets;
     }
 
-    public void setAssets(Set<Assets> assets) {
+    public void setAssets(Set<Asset> assets) {
         this.assets = assets;
     }
 }

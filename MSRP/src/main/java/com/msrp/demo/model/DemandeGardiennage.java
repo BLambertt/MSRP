@@ -1,14 +1,14 @@
 package com.msrp.demo.model;
 
 import com.msrp.demo.repository.UtilisateurRepository;
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
+@Entity
+@Table(name = "Demande_guardiennage")
 public class DemandeGardiennage {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,13 +27,12 @@ public class DemandeGardiennage {
     @Column(name = "LIEU")
     private String lieu;
 
-    @Column(name = "ID_UTILISATEUR")
-    //todo relation
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
     private Utilisateur utilisateur;
 
-    @Column(name = "ID_COMMENTAIRE")
-    //todo relation
-    private Set<Commentaire> commentaires;
+    @OneToMany(mappedBy = "demande")
+    private List<Commentaire> commentaireList;
 
     public DemandeGardiennage(String description, LocalDate date_debut, LocalDate date_fin, String lieu, Utilisateur utilisateur) {
         this.description = description;
@@ -94,11 +93,5 @@ public class DemandeGardiennage {
         this.utilisateur = utilisateur;
     }
 
-    public Set<Commentaire> getCommentaires() {
-        return commentaires;
-    }
 
-    public void setCommentaires(Set<Commentaire> commentaires) {
-        this.commentaires = commentaires;
-    }
 }

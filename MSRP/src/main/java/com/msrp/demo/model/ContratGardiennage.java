@@ -1,13 +1,12 @@
 package com.msrp.demo.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.Set;
 
+@Entity
+@Table(name = "Contrat_gardiennage")
 public class ContratGardiennage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -20,19 +19,19 @@ public class ContratGardiennage {
     @Column(name = "DATE_FIN")
     private LocalDate date_fin;
 
-    @Column(name = "ID_UTILISATEUR")
-    //todo relation
-    private Utilisateur utilisateur;
-
-    @Column(name = "ID_DEMANDE_GARDIENNAGE")
-    //todo relation
-    private DemandeGardiennage demandeGardiennage;
+//    @Column(name = "ID_UTILISATEUR")
+//    //todo relation
+//    private Utilisateur utilisateur;
+//
+//    @Column(name = "ID_DEMANDE_GARDIENNAGE")
+//    //todo relation
+//    private DemandeGardiennage demandeGardiennage;
 
     public ContratGardiennage(LocalDate date_debut, LocalDate date_fin, Utilisateur utilisateur, DemandeGardiennage demandeGardiennage) {
         this.date_debut = date_debut;
         this.date_fin = date_fin;
-        this.utilisateur = utilisateur;
-        this.demandeGardiennage = demandeGardiennage;
+//        this.utilisateur = utilisateur;
+//        this.demandeGardiennage = demandeGardiennage;
     }
 
     public ContratGardiennage() {
@@ -62,19 +61,19 @@ public class ContratGardiennage {
         this.date_fin = date_fin;
     }
 
-    public Utilisateur getUtilisateur() {
-        return utilisateur;
-    }
-
-    public void setUtilisateur(Utilisateur utilisateur) {
-        this.utilisateur = utilisateur;
-    }
-
-    public DemandeGardiennage getDemandeGardiennage() {
-        return demandeGardiennage;
-    }
-
-    public void setDemandeGardiennage(DemandeGardiennage demandeGardiennage) {
-        this.demandeGardiennage = demandeGardiennage;
-    }
+//    public Utilisateur getUtilisateur() {
+//        return utilisateur;
+//    }
+//
+//    public void setUtilisateur(Utilisateur utilisateur) {
+//        this.utilisateur = utilisateur;
+//    }
+//
+//    public DemandeGardiennage getDemandeGardiennage() {
+//        return demandeGardiennage;
+//    }
+//
+//    public void setDemandeGardiennage(DemandeGardiennage demandeGardiennage) {
+//        this.demandeGardiennage = demandeGardiennage;
+//    }
 }
