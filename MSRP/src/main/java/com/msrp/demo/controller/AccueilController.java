@@ -1,13 +1,14 @@
 package com.msrp.demo.controller;
 
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class AccueilController {
 
     @RequestMapping("/")
     String PageAccueil(){
-        return "HelloWorld";
+        return "index";
     }
 
 }

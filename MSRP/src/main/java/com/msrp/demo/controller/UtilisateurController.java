@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:8081")
 public class UtilisateurController {
 
     private final UtilisateurRepository repository;
@@ -17,6 +18,7 @@ public class UtilisateurController {
 
     // Aggregate root
     // tag::get-aggregate-root[]
+
     @GetMapping("/utilisateurs")
     List<Utilisateur> all() {
         return repository.findAll();
